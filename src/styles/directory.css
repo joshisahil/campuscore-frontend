@@ -1,40 +1,59 @@
-/* CampusCore — Student & Teacher Management */
+/* ==========================================================
+   CampusCore — Day 41 / Phase 4
+   Student & Teacher Management
+   Responsive UI, Animations and Accessibility
+   ========================================================== */
 
 .campus-directory {
   --directory-navy: #12385a;
   --directory-blue: #2563eb;
   --directory-purple: #7c3aed;
   --directory-border: #e2e8f0;
+  --directory-text: #0f172a;
 
   position: relative;
   isolation: isolate;
+  width: 100%;
   min-width: 0;
+  padding-bottom: 24px;
+
   animation: directoryEnter 450ms ease both;
 }
+
+/* ==========================================================
+   Background Decoration
+   ========================================================== */
 
 .campus-directory::before {
   position: absolute;
   z-index: -1;
   top: -70px;
   right: -40px;
+
   width: 360px;
   height: 360px;
+
   border-radius: 50%;
+
   background: radial-gradient(
     circle,
     rgba(99, 102, 241, 0.09),
     transparent 70%
   );
+
   content: "";
   pointer-events: none;
 }
 
-/* Page headings */
+/* ==========================================================
+   Typography
+   ========================================================== */
 
 .campus-directory h1 {
-  color: #12385a;
+  color: var(--directory-navy);
   font-weight: 850;
   letter-spacing: -0.04em;
+  line-height: 1.2;
 }
 
 .campus-directory h2,
@@ -46,16 +65,66 @@
   overflow-wrap: anywhere;
 }
 
-/* Summary and information cards */
+/* ==========================================================
+   Teacher Hero Section
+   ========================================================== */
+
+/*
+   The previous global h1 rule was overriding white hero
+   headings on dark backgrounds.
+
+   These selectors preserve readable white headings on
+   gradient and photo-based hero sections.
+*/
+
+.campus-directory .campus-dashboard-hero h1,
+.campus-directory .campus-dashboard-hero h2,
+.campus-directory .campus-dashboard-hero h3 {
+  color: #ffffff;
+}
+
+.campus-directory .campus-dashboard-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-width: 0;
+
+  border-radius: 28px;
+
+  box-shadow: 0 18px 45px rgba(18, 56, 90, 0.15);
+}
+
+.campus-directory .campus-dashboard-hero p {
+  line-height: 1.7;
+}
+
+/*
+   Additional compatibility for a hero section using
+   a dark gradient Tailwind background.
+*/
+
+.campus-directory .bg-gradient-to-r h1,
+.campus-directory .bg-gradient-to-br h1,
+.campus-directory .bg-gradient-to-r h2,
+.campus-directory .bg-gradient-to-br h2 {
+  color: #ffffff;
+}
+
+/* ==========================================================
+   Cards
+   ========================================================== */
 
 .campus-directory .grid > .rounded-2xl.border,
 .campus-directory .grid > .rounded-3xl.border {
   position: relative;
   overflow: hidden;
+
   background: linear-gradient(145deg, #ffffff 0%, #fbfcff 100%);
+
   box-shadow:
     0 6px 20px rgba(18, 56, 90, 0.04),
     0 1px 3px rgba(18, 56, 90, 0.03);
+
   transition:
     transform 240ms ease,
     box-shadow 240ms ease,
@@ -66,20 +135,30 @@
 .campus-directory .grid > .rounded-3xl.border:hover {
   transform: translateY(-4px);
   border-color: #c7d2fe;
+
   box-shadow: 0 18px 35px rgba(79, 70, 229, 0.1);
 }
 
-/* Tables */
+/* ==========================================================
+   Tables
+   ========================================================== */
 
 .campus-directory section:has(> .overflow-x-auto) {
-  border-color: #e2e8f0;
+  border-color: var(--directory-border);
   border-radius: 22px;
   background: #ffffff;
+
   box-shadow: 0 12px 35px rgba(18, 56, 90, 0.05);
 }
 
 .campus-directory .overflow-x-auto {
   max-width: 100%;
+
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+
+  -webkit-overflow-scrolling: touch;
+
   scrollbar-width: thin;
   scrollbar-color: #c7d2fe #f8fafc;
 }
@@ -97,6 +176,7 @@
 .campus-directory table thead th {
   padding-top: 17px;
   padding-bottom: 17px;
+
   color: #334155;
   font-size: 11px;
   font-weight: 800;
@@ -105,7 +185,7 @@
 }
 
 .campus-directory table tbody tr {
-  transition: background 180ms ease;
+  transition: background-color 180ms ease;
 }
 
 .campus-directory table tbody tr:hover {
@@ -121,23 +201,35 @@
   border-bottom: 0;
 }
 
-/* Search fields and form controls */
+/* ==========================================================
+   Inputs, Search and Forms
+   ========================================================== */
 
 .campus-directory input:not([type="checkbox"]),
 .campus-directory select,
 .campus-directory textarea {
+  min-width: 0;
   max-width: 100%;
+
   transition:
     border-color 200ms ease,
     box-shadow 200ms ease,
-    background 200ms ease;
+    background-color 200ms ease;
 }
 
 .campus-directory input:focus,
 .campus-directory select:focus,
 .campus-directory textarea:focus {
   border-color: #6366f1;
+
   box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.09);
+}
+
+.campus-directory input:focus-visible,
+.campus-directory select:focus-visible,
+.campus-directory textarea:focus-visible {
+  outline: 2px solid #818cf8;
+  outline-offset: 1px;
 }
 
 .campus-directory input:disabled,
@@ -147,9 +239,17 @@
   opacity: 0.65;
 }
 
-/* Action buttons */
+.campus-directory textarea {
+  resize: vertical;
+}
+
+/* ==========================================================
+   Buttons
+   ========================================================== */
 
 .campus-directory button {
+  max-width: 100%;
+
   transition:
     transform 180ms ease,
     background-color 180ms ease,
@@ -171,10 +271,18 @@
   outline-offset: 3px;
 }
 
-/* Student and teacher detail panels */
+.campus-directory button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+/* ==========================================================
+   Student & Teacher Detail Panels
+   ========================================================== */
 
 .campus-directory [role="dialog"] {
   box-shadow: -18px 0 70px rgba(15, 23, 42, 0.2);
+
   animation: directoryPanelIn 300ms ease both;
 }
 
@@ -194,7 +302,9 @@
   font-weight: 650;
 }
 
-/* Teacher profile cards */
+/* ==========================================================
+   Teacher Profile Cards
+   ========================================================== */
 
 .campus-directory .campus-reveal.group {
   transition:
@@ -207,14 +317,23 @@
   box-shadow: 0 20px 38px rgba(37, 99, 235, 0.11);
 }
 
-/* Messages */
+/* ==========================================================
+   Alerts and Messages
+   ========================================================== */
 
 .campus-directory [role="alert"] {
   border-radius: 13px;
   line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
-/* Animation */
+.campus-directory [role="status"] {
+  overflow-wrap: anywhere;
+}
+
+/* ==========================================================
+   Animation
+   ========================================================== */
 
 @keyframes directoryEnter {
   from {
@@ -240,19 +359,28 @@
   }
 }
 
-/* Tablet */
+/* ==========================================================
+   Tablet — 1024px and Below
+   ========================================================== */
 
 @media (max-width: 1024px) {
   .campus-directory {
     width: 100%;
+    min-width: 0;
   }
 
   .campus-directory table {
     min-width: 650px;
   }
+
+  .campus-directory .campus-dashboard-hero {
+    border-radius: 24px;
+  }
 }
 
-/* Mobile */
+/* ==========================================================
+   Mobile — 640px and Below
+   ========================================================== */
 
 @media (max-width: 640px) {
   .campus-directory {
@@ -263,6 +391,35 @@
     font-size: clamp(25px, 7vw, 32px);
   }
 
+  /* Teacher Hero */
+
+  .campus-directory .campus-dashboard-hero {
+    min-height: 0;
+    padding: 22px;
+    border-radius: 24px;
+  }
+
+  .campus-directory .campus-dashboard-hero h1,
+  .campus-directory .campus-dashboard-hero h2 {
+    color: #ffffff;
+    font-size: clamp(25px, 7.5vw, 32px);
+    line-height: 1.15;
+  }
+
+  .campus-directory .campus-dashboard-hero p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* Cards */
+
+  .campus-directory .grid > .rounded-2xl.border:hover,
+  .campus-directory .grid > .rounded-3xl.border:hover {
+    transform: none;
+  }
+
+  /* Tables */
+
   .campus-directory table {
     min-width: 620px;
   }
@@ -272,27 +429,75 @@
     white-space: nowrap;
   }
 
+  /* Forms */
+
+  .campus-directory input:not([type="checkbox"]),
+  .campus-directory select,
+  .campus-directory textarea {
+    font-size: 16px;
+  }
+
+  /* Buttons */
+
+  .campus-directory button {
+    min-height: 40px;
+  }
+
+  /* Detail Panels */
+
   .campus-directory [role="dialog"] {
     width: 100%;
     max-width: 100%;
+    max-height: 100dvh;
+    overflow-y: auto;
     border-radius: 20px 20px 0 0;
   }
 
   .campus-directory [role="dialog"] > header {
     padding: 18px;
   }
+}
 
-  .campus-directory [role="dialog"] button {
-    min-height: 40px;
+/* ==========================================================
+   Small Mobile — 380px and Below
+   ========================================================== */
+
+@media (max-width: 380px) {
+  .campus-directory {
+    padding-bottom: 16px;
   }
 
-  .campus-directory .grid > .rounded-2xl.border:hover,
-  .campus-directory .grid > .rounded-3xl.border:hover {
-    transform: none;
+  .campus-directory h1 {
+    font-size: 25px;
+  }
+
+  .campus-directory .campus-dashboard-hero {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .campus-directory .campus-dashboard-hero h1,
+  .campus-directory .campus-dashboard-hero h2 {
+    font-size: 25px;
+    line-height: 1.2;
+  }
+
+  .campus-directory .campus-dashboard-hero p {
+    font-size: 13px;
+  }
+
+  .campus-directory table {
+    min-width: 600px;
+  }
+
+  .campus-directory [role="dialog"] > header {
+    padding: 15px;
   }
 }
 
-/* Accessibility */
+/* ==========================================================
+   Reduced Motion Accessibility
+   ========================================================== */
 
 @media (prefers-reduced-motion: reduce) {
   .campus-directory,
