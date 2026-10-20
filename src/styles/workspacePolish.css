@@ -3,44 +3,57 @@
    Sidebar, Header & Dashboard Responsive Polish
    ========================================================== */
 
+/* ==========================================================
+   1. Main Workspace Layout
+   ========================================================== */
+
 .campus-workspace {
+  width: 100%;
+  min-width: 0;
+  min-height: 100vh;
+  overflow-x: clip;
+}
+
+.campus-workspace-content {
+  width: 100%;
+  min-width: 0;
+}
+
+.campus-workspace-main {
+  position: relative;
   width: 100%;
   min-width: 0;
   overflow-x: clip;
 }
 
-.campus-workspace-content {
+.campus-workspace-main > div {
   min-width: 0;
 }
 
-.campus-workspace-topbar {
-  width: 100%;
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-}
-
-.campus-workspace-topbar-inner {
-  min-height: 84px;
-}
-
-.campus-workspace-main {
-  width: 100%;
+.campus-workspace-main .grid > * {
   min-width: 0;
 }
 
-/* Accessibility */
+/* ==========================================================
+   2. Accessibility
+   ========================================================== */
 
 .campus-skip-link {
   position: fixed;
   top: -100px;
   left: 16px;
   z-index: 1000;
+
   padding: 12px 18px;
   border-radius: 12px;
+
   background: #ffffff;
   color: #12385a;
+
   font-size: 14px;
   font-weight: 800;
+  text-decoration: none;
+
   box-shadow: 0 12px 35px rgba(15, 23, 42, 0.2);
 }
 
@@ -54,16 +67,107 @@
   outline-offset: 3px;
 }
 
-/* Header */
+.campus-workspace-main:focus {
+  outline: none;
+}
+
+/* ==========================================================
+   3. Header / Top Navigation
+   ========================================================== */
+
+.campus-workspace-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+
+  width: 100%;
+
+  background: rgba(255, 255, 255, 0.88);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.85);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.campus-workspace-topbar-inner {
+  min-height: 84px;
+}
+
+.campus-workspace-breadcrumb {
+  white-space: nowrap;
+}
 
 .campus-workspace-page-title {
   max-width: 100%;
+  min-width: 0;
+
+  color: #12385a;
   line-height: 1.25;
+  letter-spacing: -0.035em;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.campus-workspace-actions {
+  min-width: 0;
 }
 
 .campus-workspace-avatar {
   user-select: none;
+  -webkit-user-select: none;
+
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease;
 }
+
+.campus-workspace-avatar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(79, 70, 229, 0.22);
+}
+
+.campus-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+  min-width: 40px;
+  min-height: 40px;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 13px;
+
+  background: #ffffff;
+  color: #12385a;
+
+  text-decoration: none;
+
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.campus-icon-button:hover {
+  transform: translateY(-1px);
+
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  color: #2563eb;
+
+  box-shadow: 0 5px 15px rgba(37, 99, 235, 0.08);
+}
+
+.campus-icon-button:active {
+  transform: scale(0.97);
+}
+
+/* Notifications */
 
 .campus-notification-link {
   position: relative;
@@ -75,40 +179,91 @@
   color: #2563eb;
 }
 
-.campus-logout-button:hover {
-  color: #dc2626;
+/* Logout */
+
+.campus-logout-button {
+  color: #e11d48;
 }
 
-/* Sidebar */
+.campus-logout-button:hover {
+  background: #fff1f2;
+  border-color: #fecdd3;
+  color: #be123c;
+}
+
+/* ==========================================================
+   4. Sidebar
+   ========================================================== */
 
 .campus-workspace-sidebar {
+  width: 272px;
   max-width: min(272px, 90vw);
-  box-shadow: 8px 0 40px rgba(15, 23, 42, 0.1);
+
+  box-shadow: 8px 0 40px rgba(15, 23, 42, 0.12);
+
+  background: linear-gradient(165deg, #12385a 0%, #174e85 50%, #4338ca 100%);
 }
 
 .campus-sidebar-scroll {
+  min-height: 0;
+
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .campus-sidebar-link {
-  min-height: 57px;
   position: relative;
+
+  display: flex;
+  align-items: center;
+
+  min-height: 57px;
+  text-decoration: none;
+
+  transition:
+    transform 200ms ease,
+    background-color 200ms ease,
+    color 200ms ease,
+    box-shadow 200ms ease;
 }
 
 .campus-sidebar-link:not(.campus-sidebar-link-active):hover {
   transform: translateX(3px);
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .campus-sidebar-link-active {
   font-weight: 800;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.1);
 }
 
 .campus-sidebar-link:focus-visible {
-  outline-color: #ffffff !important;
+  outline: 3px solid #ffffff !important;
+  outline-offset: 2px;
 }
 
+/* Sidebar feature card */
+
+.campus-sidebar-feature {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.16),
+    rgba(255, 255, 255, 0.06)
+  );
+
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.1);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Mobile overlay */
+
 .campus-sidebar-backdrop {
+  background: rgba(15, 23, 42, 0.65);
   animation: campusBackdropIn 200ms ease both;
 }
 
@@ -122,12 +277,23 @@
   }
 }
 
-/* Dashboard hero */
+/* ==========================================================
+   5. Dashboard Hero
+   ========================================================== */
 
 .campus-workspace-main .campus-dashboard-hero {
+  position: relative;
+  isolation: isolate;
+
   min-width: 0;
+  overflow: hidden;
+
+  border-radius: 28px;
+
+  box-shadow: 0 18px 45px rgba(18, 56, 90, 0.14);
 }
 
+.campus-workspace-main .campus-dashboard-hero h1,
 .campus-workspace-main .campus-dashboard-hero h2 {
   color: #ffffff;
   overflow-wrap: anywhere;
@@ -135,23 +301,40 @@
 
 .campus-workspace-main .campus-dashboard-hero p {
   overflow-wrap: anywhere;
+  line-height: 1.7;
 }
 
 .campus-workspace-main .campus-hero-visual {
   min-width: 0;
+  overflow: hidden;
+
+  border-radius: 22px;
 }
 
 .campus-workspace-main .campus-hero-visual img {
   display: block;
   width: 100%;
+  height: 100%;
+
   object-fit: cover;
+
+  transition: transform 450ms ease;
 }
 
-/* Dashboard module cards */
+.campus-workspace-main .campus-hero-visual:hover img {
+  transform: scale(1.035);
+}
+
+/* ==========================================================
+   6. Dashboard Module Cards
+   ========================================================== */
 
 .campus-workspace-main .campus-module-card {
+  position: relative;
+
   min-width: 0;
   height: 100%;
+
   transition:
     transform 220ms ease,
     box-shadow 220ms ease,
@@ -160,9 +343,11 @@
 
 .campus-workspace-main .campus-module-card:hover {
   transform: translateY(-4px);
+
   box-shadow: 0 20px 42px rgba(37, 99, 235, 0.1);
 }
 
+.campus-workspace-main .campus-module-card h3,
 .campus-workspace-main .campus-module-card h4,
 .campus-workspace-main .campus-module-card p {
   overflow-wrap: anywhere;
@@ -173,17 +358,34 @@
   outline-offset: 4px;
 }
 
-/* Prevent accidental page-level horizontal scrolling */
+/* ==========================================================
+   7. Shared Content Overflow Protection
+   ========================================================== */
 
-.campus-workspace-main > div {
+.campus-workspace-main section,
+.campus-workspace-main article {
   min-width: 0;
 }
 
-.campus-workspace-main .grid > * {
-  min-width: 0;
+.campus-workspace-main .overflow-x-auto {
+  max-width: 100%;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
-/* Tablet */
+.campus-workspace-main img {
+  max-width: 100%;
+}
+
+.campus-workspace-main input,
+.campus-workspace-main select,
+.campus-workspace-main textarea {
+  max-width: 100%;
+}
+
+/* ==========================================================
+   8. Tablet — 1024px and Below
+   ========================================================== */
 
 @media (max-width: 1024px) {
   .campus-workspace-main {
@@ -193,13 +395,20 @@
   .campus-workspace-topbar-inner {
     min-height: 76px;
   }
+
+  .campus-workspace-main .campus-dashboard-hero {
+    border-radius: 24px;
+  }
 }
 
-/* Mobile */
+/* ==========================================================
+   9. Mobile — 640px and Below
+   ========================================================== */
 
 @media (max-width: 640px) {
   .campus-workspace-topbar-inner {
     min-height: 68px;
+
     padding-inline: 14px;
     gap: 8px;
   }
@@ -217,9 +426,16 @@
     gap: 6px;
   }
 
+  .campus-icon-button {
+    min-width: 38px;
+    min-height: 38px;
+    border-radius: 12px;
+  }
+
   .campus-workspace-avatar {
     width: 36px;
     height: 36px;
+
     border-radius: 12px;
     font-size: 11px;
   }
@@ -229,11 +445,13 @@
     padding: 16px 12px 24px;
   }
 
+  /* Dashboard hero */
+
   .campus-workspace-main .campus-dashboard-hero {
-    padding: 24px 20px;
     border-radius: 22px;
   }
 
+  .campus-workspace-main .campus-dashboard-hero h1,
   .campus-workspace-main .campus-dashboard-hero h2 {
     font-size: clamp(27px, 8vw, 36px);
     line-height: 1.16;
@@ -253,15 +471,18 @@
     border-radius: 15px;
   }
 
+  /* Dashboard cards */
+
   .campus-workspace-main .campus-module-card {
     min-height: 0;
-    padding: 20px;
     border-radius: 20px;
   }
 
   .campus-workspace-main .campus-module-card:hover {
     transform: none;
   }
+
+  /* Sidebar */
 
   .campus-workspace-sidebar {
     width: min(272px, 88vw);
@@ -270,17 +491,40 @@
   .campus-sidebar-link {
     min-height: 52px;
   }
+
+  .campus-sidebar-feature {
+    border-radius: 20px;
+  }
 }
 
-/* Small phones */
+/* ==========================================================
+   10. Small Mobile — 380px and Below
+   ========================================================== */
 
 @media (max-width: 380px) {
   .campus-workspace-topbar-inner {
     padding-inline: 10px;
+    gap: 5px;
   }
 
   .campus-workspace-page-title {
     font-size: 16px;
+  }
+
+  .campus-workspace-actions {
+    gap: 4px;
+  }
+
+  .campus-icon-button {
+    min-width: 34px;
+    min-height: 34px;
+    border-radius: 10px;
+  }
+
+  .campus-workspace-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
   }
 
   .campus-workspace-main {
@@ -288,28 +532,22 @@
   }
 
   .campus-workspace-main .campus-dashboard-hero {
-    padding: 20px 16px;
+    border-radius: 20px;
   }
 
+  .campus-workspace-main .campus-dashboard-hero h1,
   .campus-workspace-main .campus-dashboard-hero h2 {
     font-size: 26px;
   }
 
   .campus-workspace-main .campus-module-card {
-    padding: 18px;
-  }
-
-  .campus-workspace-avatar {
-    width: 32px;
-    height: 32px;
-  }
-
-  .campus-workspace-actions {
-    gap: 4px;
+    border-radius: 18px;
   }
 }
 
-/* Reduced motion */
+/* ==========================================================
+   11. Reduced Motion Accessibility
+   ========================================================== */
 
 @media (prefers-reduced-motion: reduce) {
   .campus-workspace *,
