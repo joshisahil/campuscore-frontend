@@ -1,35 +1,206 @@
+/* ==========================================================
+   CampusCore — Day 41 / Phase 4
+   Responsive Operations UI
+   Classes | Attendance | Payments | Notifications
+   ========================================================== */
+
 .cc-operations {
+  --cc-primary: #2563eb;
+  --cc-secondary: #7c3aed;
+  --cc-navy: #12385a;
+  --cc-border: #e2e8f0;
+  --cc-text: #0f172a;
+
   min-width: 0;
-  animation: ccOperationsIn 0.45s ease both;
+  width: 100%;
+  padding-bottom: 24px;
+  animation: ccOperationsIn 450ms ease both;
 }
+
+/* Hero section */
+
 .cc-operations-hero {
   position: relative;
+  isolation: isolate;
   overflow: hidden;
-  background: linear-gradient(115deg, #12385a, #2563eb 52%, #7c3aed);
+  min-width: 0;
+  background: linear-gradient(115deg, #12385a 0%, #2563eb 52%, #7c3aed 100%);
   box-shadow: 0 18px 44px rgba(37, 99, 235, 0.17);
 }
+
+.cc-operations-hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: 8%;
+  bottom: -115px;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.055);
+  pointer-events: none;
+}
+
 .cc-operations-hero::after {
   content: "";
   position: absolute;
+  z-index: -1;
+  top: -115px;
+  right: -40px;
   width: 220px;
   height: 220px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.09);
-  top: -115px;
-  right: -40px;
   pointer-events: none;
 }
+
+.cc-operations-hero h1 {
+  font-weight: 850;
+  letter-spacing: -0.045em;
+  line-height: 1.15;
+}
+
+.cc-operations-hero p {
+  line-height: 1.65;
+}
+
+/* Cards */
+
 .cc-operations-card {
-  border: 1px solid #e2e8f0;
-  background: white;
+  min-width: 0;
+  border: 1px solid var(--cc-border);
+  border-radius: 20px;
+  background: #ffffff;
   box-shadow: 0 9px 30px rgba(18, 56, 90, 0.045);
   transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease;
 }
+
 .cc-operations-card:hover {
+  border-color: #c7d2fe;
   box-shadow: 0 14px 36px rgba(79, 70, 229, 0.08);
 }
+
+/* Content overflow protection */
+
+.cc-operations > *,
+.cc-operations section,
+.cc-operations article,
+.cc-operations .grid > * {
+  min-width: 0;
+}
+
+.cc-operations .overflow-x-auto {
+  max-width: 100%;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #c7d2fe #f8fafc;
+}
+
+.cc-operations table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.cc-operations table thead {
+  background: #f8faff;
+}
+
+.cc-operations table th {
+  color: #475569;
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.025em;
+}
+
+.cc-operations table tbody tr {
+  transition: background-color 180ms ease;
+}
+
+.cc-operations table tbody tr:hover {
+  background: #f8faff;
+}
+
+.cc-operations table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* Forms */
+
+.cc-operations input:not([type="checkbox"]),
+.cc-operations select,
+.cc-operations textarea {
+  min-width: 0;
+  max-width: 100%;
+  font-size: 16px;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.cc-operations textarea {
+  resize: vertical;
+}
+
+.cc-operations input:focus-visible,
+.cc-operations select:focus-visible,
+.cc-operations textarea:focus-visible {
+  outline: 2px solid #818cf8;
+  outline-offset: 1px;
+}
+
+.cc-operations input:disabled,
+.cc-operations select:disabled,
+.cc-operations textarea:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Buttons */
+
+.cc-operations button {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease,
+    opacity 160ms ease;
+}
+
+.cc-operations button:hover:not(:disabled) {
+  box-shadow: 0 5px 18px rgba(37, 99, 235, 0.12);
+}
+
+.cc-operations button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.cc-operations button:focus-visible {
+  outline: 3px solid #818cf8;
+  outline-offset: 3px;
+}
+
+.cc-operations button:disabled {
+  cursor: not-allowed;
+}
+
+/* Feedback */
+
+.cc-operations [role="alert"] {
+  overflow-wrap: anywhere;
+  line-height: 1.6;
+}
+
+.cc-operations [role="status"] {
+  overflow-wrap: anywhere;
+}
+
+/* Modal overlay */
+
 .cc-operations-modal {
   position: fixed;
   inset: 0;
@@ -42,41 +213,131 @@
   background: rgba(15, 23, 42, 0.62);
   backdrop-filter: blur(5px);
 }
+
 .cc-operations-modal > section {
+  width: 100%;
+  min-width: 0;
   max-height: calc(100dvh - 36px);
   overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #ffffff;
   box-shadow: 0 30px 90px rgba(15, 23, 42, 0.25);
-  animation: ccOperationsIn 0.2s ease both;
+  animation: ccOperationsIn 200ms ease both;
 }
+
+/* Animation */
+
 @keyframes ccOperationsIn {
   from {
     opacity: 0;
     transform: translateY(12px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
+
+/* Tablet */
+
+@media (max-width: 1024px) {
+  .cc-operations {
+    width: 100%;
+  }
+
+  .cc-operations-hero {
+    border-radius: 22px;
+  }
+
+  .cc-operations-card {
+    border-radius: 18px;
+  }
+}
+
+/* Mobile */
+
 @media (max-width: 640px) {
+  .cc-operations {
+    padding-bottom: 18px;
+  }
+
   .cc-operations-hero {
     padding: 22px;
+    border-radius: 20px;
   }
+
+  .cc-operations-hero h1 {
+    font-size: clamp(25px, 7vw, 34px);
+  }
+
+  .cc-operations-hero > div {
+    min-width: 0;
+  }
+
+  .cc-operations-hero > div:first-child {
+    align-items: flex-start;
+  }
+
+  .cc-operations-hero > div:first-child > div:last-child {
+    min-width: 0;
+  }
+
+  .cc-operations-card {
+    border-radius: 16px;
+  }
+
+  .cc-operations table {
+    min-width: 600px;
+  }
+
+  .cc-operations table th,
+  .cc-operations table td {
+    white-space: nowrap;
+  }
+
+  .cc-operations button {
+    min-height: 40px;
+  }
+
   .cc-operations-modal {
     align-items: flex-end;
     padding: 0;
   }
+
   .cc-operations-modal > section {
     max-height: 95dvh;
     border-radius: 22px 22px 0 0;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 }
+
+/* Small phones */
+
+@media (max-width: 380px) {
+  .cc-operations-hero {
+    padding: 18px;
+  }
+
+  .cc-operations-hero h1 {
+    font-size: 25px;
+  }
+
+  .cc-operations-hero p {
+    font-size: 13px;
+  }
+}
+
+/* Motion accessibility */
+
 @media (prefers-reduced-motion: reduce) {
   .cc-operations,
+  .cc-operations *,
+  .cc-operations *::before,
+  .cc-operations *::after,
   .cc-operations-modal > section {
-    animation: none;
-  }
-  .cc-operations-card {
-    transition: none;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
