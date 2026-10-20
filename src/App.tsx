@@ -7,6 +7,8 @@ import { Forbidden } from "./pages/Forbidden";
 import { Login } from "./pages/Login";
 import { ModulePage } from "./pages/ModulePage";
 import { Students } from "./pages/Students";
+import { Teachers } from "./pages/Teachers";
+import "./styles/campusMotion.css";
 
 export default function App() {
   return (
@@ -21,15 +23,7 @@ export default function App() {
 
               <Route path="students" element={<Students />} />
 
-              <Route
-                path="teachers"
-                element={
-                  <ModulePage
-                    title="Teachers"
-                    description="Faculty profiles, subject assignments, and teacher information will appear here."
-                  />
-                }
-              />
+              <Route path="teachers" element={<Teachers />} />
 
               <Route
                 path="classes"
