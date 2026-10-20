@@ -1,0 +1,306 @@
+/* CampusCore — Student & Teacher Management */
+
+.campus-directory {
+  --directory-navy: #12385a;
+  --directory-blue: #2563eb;
+  --directory-purple: #7c3aed;
+  --directory-border: #e2e8f0;
+
+  position: relative;
+  isolation: isolate;
+  min-width: 0;
+  animation: directoryEnter 450ms ease both;
+}
+
+.campus-directory::before {
+  position: absolute;
+  z-index: -1;
+  top: -70px;
+  right: -40px;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(99, 102, 241, 0.09),
+    transparent 70%
+  );
+  content: "";
+  pointer-events: none;
+}
+
+/* Page headings */
+
+.campus-directory h1 {
+  color: #12385a;
+  font-weight: 850;
+  letter-spacing: -0.04em;
+}
+
+.campus-directory h2,
+.campus-directory h3 {
+  letter-spacing: -0.025em;
+}
+
+.campus-directory p {
+  overflow-wrap: anywhere;
+}
+
+/* Summary and information cards */
+
+.campus-directory .grid > .rounded-2xl.border,
+.campus-directory .grid > .rounded-3xl.border {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(145deg, #ffffff 0%, #fbfcff 100%);
+  box-shadow:
+    0 6px 20px rgba(18, 56, 90, 0.04),
+    0 1px 3px rgba(18, 56, 90, 0.03);
+  transition:
+    transform 240ms ease,
+    box-shadow 240ms ease,
+    border-color 240ms ease;
+}
+
+.campus-directory .grid > .rounded-2xl.border:hover,
+.campus-directory .grid > .rounded-3xl.border:hover {
+  transform: translateY(-4px);
+  border-color: #c7d2fe;
+  box-shadow: 0 18px 35px rgba(79, 70, 229, 0.1);
+}
+
+/* Tables */
+
+.campus-directory section:has(> .overflow-x-auto) {
+  border-color: #e2e8f0;
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow: 0 12px 35px rgba(18, 56, 90, 0.05);
+}
+
+.campus-directory .overflow-x-auto {
+  max-width: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: #c7d2fe #f8fafc;
+}
+
+.campus-directory table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.campus-directory table thead {
+  background: linear-gradient(90deg, #eff6ff, #f5f3ff);
+}
+
+.campus-directory table thead th {
+  padding-top: 17px;
+  padding-bottom: 17px;
+  color: #334155;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.campus-directory table tbody tr {
+  transition: background 180ms ease;
+}
+
+.campus-directory table tbody tr:hover {
+  background: #f5f8ff;
+}
+
+.campus-directory table tbody td {
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+
+.campus-directory table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* Search fields and form controls */
+
+.campus-directory input:not([type="checkbox"]),
+.campus-directory select,
+.campus-directory textarea {
+  max-width: 100%;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    background 200ms ease;
+}
+
+.campus-directory input:focus,
+.campus-directory select:focus,
+.campus-directory textarea:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.09);
+}
+
+.campus-directory input:disabled,
+.campus-directory select:disabled,
+.campus-directory textarea:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+/* Action buttons */
+
+.campus-directory button {
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    opacity 180ms ease;
+}
+
+.campus-directory button:hover:not(:disabled) {
+  box-shadow: 0 5px 14px rgba(18, 56, 90, 0.09);
+}
+
+.campus-directory button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.campus-directory button:focus-visible {
+  outline: 3px solid #818cf8;
+  outline-offset: 3px;
+}
+
+/* Student and teacher detail panels */
+
+.campus-directory [role="dialog"] {
+  box-shadow: -18px 0 70px rgba(15, 23, 42, 0.2);
+  animation: directoryPanelIn 300ms ease both;
+}
+
+.campus-directory [role="dialog"] > header {
+  background: linear-gradient(120deg, #f0f7ff, #f7f3ff);
+}
+
+.campus-directory [role="dialog"] input,
+.campus-directory [role="dialog"] textarea,
+.campus-directory [role="dialog"] select {
+  min-height: 43px;
+  border-radius: 11px;
+}
+
+.campus-directory [role="dialog"] label {
+  color: #334155;
+  font-weight: 650;
+}
+
+/* Teacher profile cards */
+
+.campus-directory .campus-reveal.group {
+  transition:
+    transform 240ms ease,
+    box-shadow 240ms ease,
+    border-color 240ms ease;
+}
+
+.campus-directory .campus-reveal.group:hover {
+  box-shadow: 0 20px 38px rgba(37, 99, 235, 0.11);
+}
+
+/* Messages */
+
+.campus-directory [role="alert"] {
+  border-radius: 13px;
+  line-height: 1.6;
+}
+
+/* Animation */
+
+@keyframes directoryEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes directoryPanelIn {
+  from {
+    opacity: 0;
+    transform: translateX(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Tablet */
+
+@media (max-width: 1024px) {
+  .campus-directory {
+    width: 100%;
+  }
+
+  .campus-directory table {
+    min-width: 650px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 640px) {
+  .campus-directory {
+    padding-bottom: 20px;
+  }
+
+  .campus-directory h1 {
+    font-size: clamp(25px, 7vw, 32px);
+  }
+
+  .campus-directory table {
+    min-width: 620px;
+  }
+
+  .campus-directory table th,
+  .campus-directory table td {
+    white-space: nowrap;
+  }
+
+  .campus-directory [role="dialog"] {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .campus-directory [role="dialog"] > header {
+    padding: 18px;
+  }
+
+  .campus-directory [role="dialog"] button {
+    min-height: 40px;
+  }
+
+  .campus-directory .grid > .rounded-2xl.border:hover,
+  .campus-directory .grid > .rounded-3xl.border:hover {
+    transform: none;
+  }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .campus-directory,
+  .campus-directory *,
+  .campus-directory *::before,
+  .campus-directory *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

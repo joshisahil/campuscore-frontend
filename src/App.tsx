@@ -1,14 +1,18 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+
 import { AuthProvider } from "./auth/AuthContext";
 import { ProtectedRoute } from "./auth/ProtectedRoute";
 import { AppLayout } from "./components/AppLayout";
+
 import { Dashboard } from "./pages/Dashboard";
 import { Forbidden } from "./pages/Forbidden";
 import { Login } from "./pages/Login";
 import { ModulePage } from "./pages/ModulePage";
 import { Students } from "./pages/Students";
 import { Teachers } from "./pages/Teachers";
+
 import "./styles/campusMotion.css";
+import "./styles/directory.css";
 
 export default function App() {
   return (
@@ -21,9 +25,23 @@ export default function App() {
             <Route element={<AppLayout />}>
               <Route index element={<Dashboard />} />
 
-              <Route path="students" element={<Students />} />
+              <Route
+                path="students"
+                element={
+                  <div className="campus-directory">
+                    <Students />
+                  </div>
+                }
+              />
 
-              <Route path="teachers" element={<Teachers />} />
+              <Route
+                path="teachers"
+                element={
+                  <div className="campus-directory">
+                    <Teachers />
+                  </div>
+                }
+              />
 
               <Route
                 path="classes"
