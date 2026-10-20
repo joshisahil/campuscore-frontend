@@ -1,18 +1,35 @@
 import { useState, type FormEvent } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
-import { LockKeyhole, School } from "lucide-react";
+import {
+  ArrowRight,
+  BookOpen,
+  Eye,
+  EyeOff,
+  GraduationCap,
+  LockKeyhole,
+  Mail,
+  School,
+  ShieldCheck,
+  Sparkles,
+} from "lucide-react";
+
 import { useAuth } from "../auth/AuthContext";
 import { ApiError } from "../lib/api";
+import "./login.css";
+
 export function Login() {
   const { session, login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
-  if (session) return <Navigate to="/" replace />;
+
   const from = (location.state as { from?: unknown } | null)?.from;
+
   const redirect =
     typeof from === "string" &&
     from.startsWith("/") &&
@@ -20,11 +37,15 @@ export function Login() {
     from !== "/login"
       ? from
       : "/";
+
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
     if (busy) return;
+
     setBusy(true);
     setError("");
+
     try {
       await login(username.trim(), password);
       navigate(redirect, { replace: true });
@@ -40,81 +61,198 @@ export function Login() {
       setBusy(false);
     }
   }
+
+  if (session) {
+    return <Navigate to="/" replace />;
+  }
+
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[#f5f7fb] px-5 py-10">
-      <div className="w-full max-w-md rounded-3xl border border-slate-200 bg-white p-8 shadow-sm sm:p-10">
-        <div className="inline-flex rounded-2xl bg-[#12385a] p-3 text-white">
-          <School size={28} />
-        </div>
-        <h1 className="mt-6 text-3xl font-bold tracking-tight">
-          Sign in to CampusCore
-        </h1>
-        <p className="mt-3 text-sm leading-6 text-slate-500">
-          Use your school account to access your workspace.
-        </p>
-        <form onSubmit={submit} className="mt-7 space-y-5">
-          <div>
-            <label
-              htmlFor="username"
-              className="mb-2 block text-sm font-semibold"
-            >
-              Username
-            </label>
-            <input
-              id="username"
-              name="username"
-              autoComplete="username"
-              required
-              maxLength={100}
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:border-sky-600 focus:ring-2 focus:ring-sky-100"
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="password"
-              className="mb-2 block text-sm font-semibold"
-            >
-              Password
-            </label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              autoComplete="current-password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:border-sky-600 focus:ring-2 focus:ring-sky-100"
-            />
-          </div>
-          {error && (
-            <p
-              role="alert"
-              className="rounded-lg bg-red-50 p-3 text-sm text-red-700"
-            >
-              {error}
+    <main className="cc-login">
+      <div className="cc-login-photo" aria-hidden="true" />
+      <div className="cc-login-overlay" aria-hidden="true" />
+      <div className="cc-login-orb cc-login-orb-one" aria-hidden="true" />
+      <div className="cc-login-orb cc-login-orb-two" aria-hidden="true" />
+
+      <div className="cc-login-shell">
+        <section className="cc-login-story">
+          <Link to="/" className="cc-login-brand">
+            <span className="cc-login-brand-icon">
+              <School size={27} />
+            </span>
+
+            <span>
+              <strong>CampusCore</strong>
+              <small>School Management Platform</small>
+            </span>
+          </Link>
+
+          <div className="cc-login-story-content">
+            <span className="cc-login-eyebrow">
+              <Sparkles size={15} />
+              Your connected campus
+            </span>
+
+            <h1>
+              A smarter way
+              <br />
+              to manage
+              <br />
+              <span>education.</span>
+            </h1>
+
+            <p>
+              One beautifully connected workspace for students, teachers, and
+              school operations.
             </p>
-          )}
-          <button
-            type="submit"
-            disabled={busy}
-            className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#12385a] px-4 py-3 font-semibold text-white hover:bg-[#1b4f78] disabled:opacity-60"
-          >
-            <LockKeyhole size={17} />
-            {busy ? "Signing in…" : "Sign in"}
-          </button>
-        </form>
-        <p className="mt-6 text-center text-xs text-slate-500">
-          Your session ends when you close this browser tab.
-        </p>
-        <Link
-          to="/"
-          className="mt-5 block text-center text-sm text-slate-500 hover:underline"
-        >
-          Back to workspace
-        </Link>
+
+            <div className="cc-login-benefits">
+              <div>
+                <span className="cc-login-benefit-icon">
+                  <GraduationCap size={20} />
+                </span>
+                <span>
+                  <strong>Student management</strong>
+                  <small>Everything in one place</small>
+                </span>
+              </div>
+
+              <div>
+                <span className="cc-login-benefit-icon">
+                  <BookOpen size={20} />
+                </span>
+                <span>
+                  <strong>Academic operations</strong>
+                  <small>Simple, connected workflows</small>
+                </span>
+              </div>
+
+              <div>
+                <span className="cc-login-benefit-icon">
+                  <ShieldCheck size={20} />
+                </span>
+                <span>
+                  <strong>Role-based access</strong>
+                  <small>Designed for your school team</small>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <p className="cc-login-story-footer">
+            CampusCore · Your school, connected.
+          </p>
+        </section>
+
+        <section className="cc-login-form-section">
+          <div className="cc-login-card">
+            <div className="cc-login-card-glow" aria-hidden="true" />
+
+            <div className="cc-login-mobile-brand">
+              <School size={22} />
+              <strong>CampusCore</strong>
+            </div>
+
+            <span className="cc-login-welcome-icon">
+              <GraduationCap size={26} />
+            </span>
+
+            <span className="cc-login-card-eyebrow">WELCOME BACK</span>
+
+            <h2>Sign in to your workspace</h2>
+
+            <p className="cc-login-description">
+              Enter your school account credentials to continue.
+            </p>
+
+            <form onSubmit={submit} className="cc-login-form">
+              <div className="cc-login-field">
+                <label htmlFor="username">Email or username</label>
+
+                <div className="cc-login-input-wrap">
+                  <Mail size={19} aria-hidden="true" />
+
+                  <input
+                    id="username"
+                    name="username"
+                    type="text"
+                    autoComplete="username"
+                    placeholder="Enter your username"
+                    maxLength={100}
+                    required
+                    value={username}
+                    onChange={(event) => setUsername(event.target.value)}
+                    disabled={busy}
+                  />
+                </div>
+              </div>
+
+              <div className="cc-login-field">
+                <label htmlFor="password">Password</label>
+
+                <div className="cc-login-input-wrap">
+                  <LockKeyhole size={19} aria-hidden="true" />
+
+                  <input
+                    id="password"
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    autoComplete="current-password"
+                    placeholder="Enter your password"
+                    required
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
+                    disabled={busy}
+                  />
+
+                  <button
+                    type="button"
+                    className="cc-login-password-toggle"
+                    aria-label={
+                      showPassword ? "Hide password" : "Show password"
+                    }
+                    aria-pressed={showPassword}
+                    onClick={() => setShowPassword((current) => !current)}
+                  >
+                    {showPassword ? <EyeOff size={19} /> : <Eye size={19} />}
+                  </button>
+                </div>
+              </div>
+
+              {error && (
+                <div className="cc-login-error" role="alert" aria-live="polite">
+                  {error}
+                </div>
+              )}
+
+              <button className="cc-login-submit" type="submit" disabled={busy}>
+                {busy ? (
+                  <>
+                    <span className="cc-login-spinner" />
+                    Signing in...
+                  </>
+                ) : (
+                  <>
+                    Sign in
+                    <ArrowRight size={19} />
+                  </>
+                )}
+              </button>
+            </form>
+
+            <div className="cc-login-secure">
+              <ShieldCheck size={16} />
+              <span>Protected school workspace</span>
+            </div>
+
+            <p className="cc-login-session-note">
+              Your session ends when you close this browser tab.
+            </p>
+          </div>
+
+          <p className="cc-login-bottom-text">
+            Built for better school management.
+          </p>
+        </section>
       </div>
     </main>
   );
