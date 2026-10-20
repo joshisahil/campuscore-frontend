@@ -1,0 +1,324 @@
+/* ==========================================================
+   CampusCore — Day 41 / Phase 4C
+   Sidebar, Header & Dashboard Responsive Polish
+   ========================================================== */
+
+.campus-workspace {
+  width: 100%;
+  min-width: 0;
+  overflow-x: clip;
+}
+
+.campus-workspace-content {
+  min-width: 0;
+}
+
+.campus-workspace-topbar {
+  width: 100%;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.campus-workspace-topbar-inner {
+  min-height: 84px;
+}
+
+.campus-workspace-main {
+  width: 100%;
+  min-width: 0;
+}
+
+/* Accessibility */
+
+.campus-skip-link {
+  position: fixed;
+  top: -100px;
+  left: 16px;
+  z-index: 1000;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #12385a;
+  font-size: 14px;
+  font-weight: 800;
+  box-shadow: 0 12px 35px rgba(15, 23, 42, 0.2);
+}
+
+.campus-skip-link:focus {
+  top: 12px;
+}
+
+.campus-workspace a:focus-visible,
+.campus-workspace button:focus-visible {
+  outline: 3px solid #818cf8;
+  outline-offset: 3px;
+}
+
+/* Header */
+
+.campus-workspace-page-title {
+  max-width: 100%;
+  line-height: 1.25;
+}
+
+.campus-workspace-avatar {
+  user-select: none;
+}
+
+.campus-notification-link {
+  position: relative;
+  text-decoration: none;
+}
+
+.campus-notification-link:hover {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.campus-logout-button:hover {
+  color: #dc2626;
+}
+
+/* Sidebar */
+
+.campus-workspace-sidebar {
+  max-width: min(272px, 90vw);
+  box-shadow: 8px 0 40px rgba(15, 23, 42, 0.1);
+}
+
+.campus-sidebar-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+.campus-sidebar-link {
+  min-height: 57px;
+  position: relative;
+}
+
+.campus-sidebar-link:not(.campus-sidebar-link-active):hover {
+  transform: translateX(3px);
+}
+
+.campus-sidebar-link-active {
+  font-weight: 800;
+}
+
+.campus-sidebar-link:focus-visible {
+  outline-color: #ffffff !important;
+}
+
+.campus-sidebar-backdrop {
+  animation: campusBackdropIn 200ms ease both;
+}
+
+@keyframes campusBackdropIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Dashboard hero */
+
+.campus-workspace-main .campus-dashboard-hero {
+  min-width: 0;
+}
+
+.campus-workspace-main .campus-dashboard-hero h2 {
+  color: #ffffff;
+  overflow-wrap: anywhere;
+}
+
+.campus-workspace-main .campus-dashboard-hero p {
+  overflow-wrap: anywhere;
+}
+
+.campus-workspace-main .campus-hero-visual {
+  min-width: 0;
+}
+
+.campus-workspace-main .campus-hero-visual img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* Dashboard module cards */
+
+.campus-workspace-main .campus-module-card {
+  min-width: 0;
+  height: 100%;
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease;
+}
+
+.campus-workspace-main .campus-module-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 42px rgba(37, 99, 235, 0.1);
+}
+
+.campus-workspace-main .campus-module-card h4,
+.campus-workspace-main .campus-module-card p {
+  overflow-wrap: anywhere;
+}
+
+.campus-workspace-main .campus-module-card:focus-visible {
+  outline: 3px solid #6366f1;
+  outline-offset: 4px;
+}
+
+/* Prevent accidental page-level horizontal scrolling */
+
+.campus-workspace-main > div {
+  min-width: 0;
+}
+
+.campus-workspace-main .grid > * {
+  min-width: 0;
+}
+
+/* Tablet */
+
+@media (max-width: 1024px) {
+  .campus-workspace-main {
+    padding: 24px;
+  }
+
+  .campus-workspace-topbar-inner {
+    min-height: 76px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 640px) {
+  .campus-workspace-topbar-inner {
+    min-height: 68px;
+    padding-inline: 14px;
+    gap: 8px;
+  }
+
+  .campus-workspace-breadcrumb {
+    font-size: 9px;
+    letter-spacing: 0.08em;
+  }
+
+  .campus-workspace-page-title {
+    font-size: 18px;
+  }
+
+  .campus-workspace-actions {
+    gap: 6px;
+  }
+
+  .campus-workspace-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    font-size: 11px;
+  }
+
+  .campus-workspace-main {
+    min-height: calc(100dvh - 68px);
+    padding: 16px 12px 24px;
+  }
+
+  .campus-workspace-main .campus-dashboard-hero {
+    padding: 24px 20px;
+    border-radius: 22px;
+  }
+
+  .campus-workspace-main .campus-dashboard-hero h2 {
+    font-size: clamp(27px, 8vw, 36px);
+    line-height: 1.16;
+  }
+
+  .campus-workspace-main .campus-dashboard-hero p {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .campus-workspace-main .campus-hero-visual {
+    border-radius: 20px;
+  }
+
+  .campus-workspace-main .campus-hero-visual img {
+    height: 210px;
+    border-radius: 15px;
+  }
+
+  .campus-workspace-main .campus-module-card {
+    min-height: 0;
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .campus-workspace-main .campus-module-card:hover {
+    transform: none;
+  }
+
+  .campus-workspace-sidebar {
+    width: min(272px, 88vw);
+  }
+
+  .campus-sidebar-link {
+    min-height: 52px;
+  }
+}
+
+/* Small phones */
+
+@media (max-width: 380px) {
+  .campus-workspace-topbar-inner {
+    padding-inline: 10px;
+  }
+
+  .campus-workspace-page-title {
+    font-size: 16px;
+  }
+
+  .campus-workspace-main {
+    padding: 12px 10px 20px;
+  }
+
+  .campus-workspace-main .campus-dashboard-hero {
+    padding: 20px 16px;
+  }
+
+  .campus-workspace-main .campus-dashboard-hero h2 {
+    font-size: 26px;
+  }
+
+  .campus-workspace-main .campus-module-card {
+    padding: 18px;
+  }
+
+  .campus-workspace-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .campus-workspace-actions {
+    gap: 4px;
+  }
+}
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .campus-workspace *,
+  .campus-workspace *::before,
+  .campus-workspace *::after,
+  .campus-sidebar-backdrop {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
