@@ -6,6 +6,7 @@ import { Dashboard } from "./pages/Dashboard";
 import { Forbidden } from "./pages/Forbidden";
 import { Login } from "./pages/Login";
 import { ModulePage } from "./pages/ModulePage";
+import { Students } from "./pages/Students";
 
 export default function App() {
   return (
@@ -18,15 +19,7 @@ export default function App() {
             <Route element={<AppLayout />}>
               <Route index element={<Dashboard />} />
 
-              <Route
-                path="students"
-                element={
-                  <ModulePage
-                    title="Students"
-                    description="Student records, profiles, and class enrollment will appear here."
-                  />
-                }
-              />
+              <Route path="students" element={<Students />} />
 
               <Route
                 path="teachers"
